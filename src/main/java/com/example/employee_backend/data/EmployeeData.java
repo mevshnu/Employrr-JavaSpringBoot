@@ -11,5 +11,30 @@ public class EmployeeData {
     {
         return "Welcome to Homepage";
     }
+    @GetMapping("/search")
+    public String Search()
+    {
+        return "Search";
+    }
+    @GetMapping("/add")
+    public String Add()
+    {
+        return "add";
+    }
+    @GetMapping("/view")
+    public String View()
+    {
+        return "view";
+    }
+    @GetMapping("/delete")
+    public String Delete()
+    {
+        return "delete";
+    }
+    @GetMapping("/edit")
+    public String Edit()
+    {
+        return "edit";
+    }
 
 }
