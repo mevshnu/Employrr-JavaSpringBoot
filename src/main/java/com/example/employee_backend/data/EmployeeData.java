@@ -1,24 +1,29 @@
 package com.example.employee_backend.data;
 
 
+import com.example.employee_backend.dao.Employeedao;
 import com.example.employee_backend.model.Employe;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class EmployeeData {
+    @Autowired
+    private Employeedao dao;
     @PostMapping("/")
     public String Home()
     {
         return "Welcome to Homepage";
     }
+    @CrossOrigin(origins = "*")
     @PostMapping("/search")
     public String Search()
     {
         return "Search";
     }
+    @CrossOrigin(origins = "*")
     @PostMapping(path="/add",consumes = "application/json",produces = "application/json")
     public String Add(@RequestBody Employe e)
     {
@@ -30,19 +35,22 @@ public class EmployeeData {
         System.out.println(e.getMobileNo().toString());
         System.out.println(e.getUsername().toString());
         System.out.println(e.getPassword().toString());
-
+        dao.save(e);
         return "added successfully";
     }
-    @GetMapping("/view")
-    public String View()
+    @CrossOrigin(origins = "*")
+    @GetMapping("/viewall")
+    public List<Employe> View()
     {
-        return "view";
+        return (List<Employe>) dao.findAll();
     }
+    @CrossOrigin(origins = "*")
     @PostMapping("/delete")
     public String Delete()
     {
         return "delete";
     }
+    @CrossOrigin(origins = "*")
     @PostMapping("/edit")
     public String Edit()
     {
