@@ -20,10 +20,13 @@ public class EmployeeData {
         return "Welcome to Homepage";
     }
     @CrossOrigin(origins = "*")
-    @PostMapping("/search")
-    public String Search()
+    @PostMapping(path="/search",consumes = "application/json",produces="application/json")
+    public List<Employe> Search(@RequestBody Employe e)
     {
-        return "Search";
+        String empcode = String.valueOf(e.getCode());
+        System.out.println(empcode);
+        dao.SearchEmployee(e.getCode());
+        return (List<Employe>) dao.SearchEmployee(e.getCode());
     }
     @CrossOrigin(origins = "*")
     @PostMapping(path="/add",consumes = "application/json",produces = "application/json")
